@@ -2,44 +2,77 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
 const testimonials = [
-  { name: "Ana Carolina", role: "Cliente há 2 anos", text: "Minhas unhas nunca foram tão lindas. O atendimento é impecável e o resultado sempre supera minhas expectativas. Não troco por nada!", stars: 5 },
-  { name: "Juliana Mendes", role: "Cliente há 1 ano", text: "A técnica em gel é incrível, dura muito mais do que imaginei. Já indiquei para todas as minhas amigas. Lugar maravilhoso!", stars: 5 },
-  { name: "Fernanda Lima", role: "Cliente há 6 meses", text: "Ambiente lindo, atendimento personalizado e resultado perfeito. Me sinto uma rainha cada vez que saio daqui.", stars: 5 },
-  { name: "Mariana Costa", role: "Cliente há 3 anos", text: "Profissionalismo e carinho em cada detalhe. A nail art ficou exatamente como eu queria. Amei demais!", stars: 5 },
+  { name: "Ana Carolina M.", city: "São Paulo, SP", text: "Minhas unhas nunca foram tão lindas. O atendimento é impecável e o resultado sempre supera minhas expectativas. Voltei três vezes esse mês.", stars: 5 },
+  { name: "Juliana Mendes", city: "Campinas, SP", text: "A técnica em gel é incrível — dura muito mais do que imaginei. O ambiente é sofisticado e me sinto especial a cada visita. Indispensável.", stars: 5 },
+  { name: "Fernanda Lima", city: "São Paulo, SP", text: "Ambiente lindo, atendimento personalizado e resultado perfeito. Me sinto uma rainha cada vez que saio daqui. Recomendo de olhos fechados.", stars: 5 },
+  { name: "Mariana Costa", city: "Santos, SP", text: "Profissionalismo e carinho em cada detalhe. A nail art ficou exatamente como eu queria — até melhor. Um lugar que realmente entende de luxo.", stars: 5 },
 ]
 
 export default function Testimonials() {
   const [current, setCurrent] = useState(0)
-  const prev = () => setCurrent((c) => (c === 0 ? testimonials.length - 1 : c - 1))
-  const next = () => setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1))
 
   return (
-    <section id="depoimentos" className="py-28 bg-cream px-6">
-      <div className="max-w-4xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="text-center mb-20">
-          <p className="font-body text-xs tracking-[0.4em] uppercase text-rose mb-4">O que dizem</p>
-          <h2 className="font-display text-5xl md:text-6xl font-light text-espresso"><span className="italic text-rose">Depoimentos</span></h2>
+    <section id="depoimentos" className="py-32 bg-espresso relative overflow-hidden">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <span className="font-display text-[25rem] text-cream/[0.015] leading-none select-none">"</span>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
+        >
+          <p className="font-body text-[10px] tracking-[0.5em] uppercase text-gold mb-4">Experiências reais</p>
+          <h2 className="font-display text-5xl md:text-6xl font-light text-cream">
+            O que nossas <span className="italic text-nude">clientes</span><br />dizem
+          </h2>
         </motion.div>
-        <div className="relative">
-          <AnimatePresence mode="wait">
-            <motion.div key={current} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.5 }} className="text-center px-8">
-              <div className="flex justify-center gap-1 mb-8">
-                {[...Array(testimonials[current].stars)].map((_, i) => (<span key={i} className="text-gold text-lg">★</span>))}
-              </div>
-              <p className="font-display text-2xl md:text-3xl font-light italic text-espresso leading-relaxed mb-10">"{testimonials[current].text}"</p>
-              <div>
-                <p className="font-body font-medium text-espresso tracking-wide">{testimonials[current].name}</p>
-                <p className="font-body text-sm text-espresso/50 mt-1">{testimonials[current].role}</p>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-          <div className="flex justify-center gap-6 mt-14">
-            <button onClick={prev} className="w-10 h-10 border border-nude flex items-center justify-center text-espresso/50 hover:border-rose hover:text-rose transition-colors duration-300">←</button>
-            <div className="flex gap-2 items-center">
-              {testimonials.map((_, i) => (<button key={i} onClick={() => setCurrent(i)} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === current ? "bg-rose w-6" : "bg-nude"}`} />))}
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={current}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center"
+          >
+            <div className="flex justify-center gap-1.5 mb-10">
+              {[...Array(5)].map((_, i) => (
+                <span key={i} className="text-gold text-sm">★</span>
+              ))}
             </div>
-            <button onClick={next} className="w-10 h-10 border border-nude flex items-center justify-center text-espresso/50 hover:border-rose hover:text-rose transition-colors duration-300">→</button>
-          </div>
+
+            <blockquote className="font-display text-2xl md:text-3xl font-light italic text-cream/90 leading-relaxed mb-12 max-w-2xl mx-auto">
+              "{testimonials[current].text}"
+            </blockquote>
+
+            <div className="flex items-center justify-center gap-4">
+              <div className="w-8 h-px bg-gold/40" />
+              <div>
+                <p className="font-body text-sm tracking-widest text-nude">{testimonials[current].name}</p>
+                <p className="font-body text-[10px] tracking-[0.3em] uppercase text-nude/30 mt-1">{testimonials[current].city}</p>
+              </div>
+              <div className="w-8 h-px bg-gold/40" />
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="flex justify-center gap-3 mt-16">
+          {testimonials.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className={`transition-all duration-500 ${
+                i === current
+                  ? "w-8 h-px bg-gold"
+                  : "w-3 h-px bg-nude/30 hover:bg-nude/60"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>

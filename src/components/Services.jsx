@@ -1,32 +1,80 @@
 import { motion } from "framer-motion"
 
 const services = [
-  { name: "Alongamento em Gel", desc: "Extensão natural e resistente com gel de alta qualidade. Durabilidade incomparável.", price: "A partir de R$ 120", icon: "✦" },
-  { name: "Gel em Fibra de Vidro", desc: "Reforço com fibra de vidro para unhas mais resistentes e flexíveis.", price: "A partir de R$ 100", icon: "◈" },
-  { name: "Nail Art Premium", desc: "Designs exclusivos e personalizados. Cada unha é uma obra de arte.", price: "A partir de R$ 60", icon: "❋" },
-  { name: "Manutenção em Gel", desc: "Manutenção completa para manter suas unhas sempre impecáveis.", price: "A partir de R$ 80", icon: "◇" },
-  { name: "Banho de Gel", desc: "Camada protetora de gel para unhas naturais com acabamento perfeito.", price: "A partir de R$ 70", icon: "◉" },
-  { name: "Remoção + Aplicação", desc: "Remoção segura e nova aplicação com cuidado total com a saúde da unha.", price: "A partir de R$ 140", icon: "✿" },
+  { num: "I", name: "Alongamento em Gel", desc: "Extensão natural e resistente com gel importado de alta qualidade. Durabilidade incomparável por até 4 semanas.", price: "R$ 120", time: "2h" },
+  { num: "II", name: "Gel em Fibra de Vidro", desc: "Reforço com fibra de vidro para unhas mais resistentes, flexíveis e com acabamento ultra fino.", price: "R$ 100", time: "1h30" },
+  { num: "III", name: "Nail Art Premium", desc: "Designs exclusivos e personalizados. Desde o minimalismo elegante até criações artísticas elaboradas.", price: "R$ 60+", time: "1h" },
+  { num: "IV", name: "Manutenção em Gel", desc: "Manutenção completa com reequilíbrio, lixamento e reaplicação para manter o resultado perfeito.", price: "R$ 80", time: "1h30" },
+  { num: "V", name: "Banho de Gel", desc: "Camada protetora de gel sobre as unhas naturais. Brilho duradouro e proteção total.", price: "R$ 70", time: "1h" },
+  { num: "VI", name: "Remoção + Nova Aplicação", desc: "Remoção segura sem danos com nova aplicação completa. Transição perfeita entre estilos.", price: "R$ 140", time: "3h" },
 ]
 
 export default function Services() {
   return (
-    <section id="serviços" className="py-28 bg-cream px-6">
-      <div className="max-w-6xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="text-center mb-20">
-          <p className="font-body text-xs tracking-[0.4em] uppercase text-rose mb-4">O que oferecemos</p>
-          <h2 className="font-display text-5xl md:text-6xl font-light text-espresso">Nossos <span className="italic text-rose">Serviços</span></h2>
+    <section id="serviços" className="py-32 bg-espresso relative overflow-hidden">
+      {/* Background text */}
+      <div className="absolute top-0 right-0 font-display text-[20rem] text-cream/[0.02] leading-none pointer-events-none select-none">
+        GEL
+      </div>
+
+      <div className="max-w-7xl mx-auto px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="flex items-end justify-between mb-20 flex-wrap gap-6"
+        >
+          <div>
+            <p className="font-body text-[10px] tracking-[0.5em] uppercase text-gold mb-4">O que oferecemos</p>
+            <h2 className="font-display text-5xl md:text-7xl font-light text-cream leading-tight">
+              Nossos<br /><span className="italic text-nude">Serviços</span>
+            </h2>
+          </div>
+          <p className="font-body font-light text-nude/40 text-sm max-w-xs leading-loose">
+            Cada serviço é executado com precisão milimétrica e produtos da mais alta qualidade.
+          </p>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-nude/30">
+
+        <div className="divide-y divide-nude/10">
           {services.map((s, i) => (
-            <motion.div key={s.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1 }} whileHover={{ backgroundColor: "#2C1810", color: "#FAF6F1" }} className="group bg-cream p-10 transition-colors duration-500 cursor-default">
-              <span className="block text-2xl text-rose mb-6 group-hover:text-gold transition-colors duration-500">{s.icon}</span>
-              <h3 className="font-display text-2xl font-light text-espresso group-hover:text-cream transition-colors duration-500 mb-3">{s.name}</h3>
-              <p className="font-body font-light text-espresso/60 group-hover:text-nude/70 transition-colors duration-500 text-sm leading-relaxed mb-6">{s.desc}</p>
-              <span className="font-body text-xs tracking-widest uppercase text-rose group-hover:text-gold transition-colors duration-500">{s.price}</span>
+            <motion.div
+              key={s.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.08 }}
+              className="group grid grid-cols-12 gap-6 py-8 items-center hover:bg-nude/5 transition-colors duration-500 px-4 -mx-4 cursor-default"
+            >
+              <div className="col-span-1">
+                <span className="font-display text-sm font-light text-gold/40 group-hover:text-gold transition-colors duration-500">{s.num}</span>
+              </div>
+              <div className="col-span-5">
+                <h3 className="font-display text-2xl font-light text-cream group-hover:text-nude transition-colors duration-500">{s.name}</h3>
+              </div>
+              <div className="col-span-4 hidden md:block">
+                <p className="font-body font-light text-nude/40 text-sm leading-relaxed group-hover:text-nude/60 transition-colors duration-500">{s.desc}</p>
+              </div>
+              <div className="col-span-2 md:col-span-2 text-right">
+                <p className="font-display text-xl text-gold">{s.price}</p>
+                <p className="font-body text-[10px] tracking-widest uppercase text-nude/30 mt-1">{s.time}</p>
+              </div>
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-16 pt-8 border-t border-nude/10 flex items-center justify-between flex-wrap gap-4"
+        >
+          <p className="font-body text-[11px] tracking-[0.3em] uppercase text-nude/30">* Preços sujeitos a alteração conforme complexidade</p>
+          <a href="#agendar" className="group flex items-center gap-3 font-body text-[11px] tracking-[0.3em] uppercase text-gold hover:text-nude transition-colors duration-500">
+            Agendar agora
+            <span className="w-6 h-px bg-gold group-hover:w-10 transition-all duration-500" />
+          </a>
+        </motion.div>
       </div>
     </section>
   )
