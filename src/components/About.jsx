@@ -27,8 +27,13 @@ export default function About() {
                 src="/images/owner-katiuscia.jpg"
                 alt="Katiuscia — KF Nail Design"
                 className="w-full h-full object-cover object-top"
+                style={{ filter: "brightness(0.95) contrast(1.05)" }}
               />
-              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
+              {/* Bottom fade — blends photo background into white section */}
+              <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/70 to-transparent" />
+              {/* Side fades — softens any background bleed */}
+              <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-white/20 to-transparent" />
+              <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-white/20 to-transparent" />
             </div>
 
             {/* Floating stat card */}

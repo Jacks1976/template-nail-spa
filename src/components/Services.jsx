@@ -11,7 +11,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="serviços" className="py-36 bg-white relative overflow-hidden">
+    <section id="serviços" className="py-36 bg-white relative overflow-hidden" style={{ background: "#FFFFFF" }}>
       {/* Ghost section number */}
       <span className="absolute top-8 right-8 font-display text-[12rem] font-bold leading-none select-none pointer-events-none" style={{ color: "rgba(0,0,0,0.025)" }}>
         02

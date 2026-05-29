@@ -29,11 +29,15 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="cursor-pointer flex-shrink-0">
+        <a
+          href="#"
+          className={`cursor-pointer flex-shrink-0 transition-all duration-500 ${scrolled ? "border-b border-gold/50 pb-0.5" : ""}`}
+        >
           <img
             src="/images/logo-kf.png"
             alt="KF Nail Design"
-            className="h-8 w-auto object-contain"
+            style={{ width: "80px", height: "auto" }}
+            className="object-contain"
           />
         </a>
 
