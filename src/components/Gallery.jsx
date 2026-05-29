@@ -2,52 +2,64 @@ import { motion } from "framer-motion"
 import { useState } from "react"
 
 const photos = [
-  { label: "Red Passion",     img: "/images/nail-red-flat.png",      span: "col-span-2 row-span-2" },
-  { label: "Nude Ring",       img: "/images/nail-nude-ring.png",     span: "col-span-1 row-span-1" },
-  { label: "Nude Wine",       img: "/images/nail-nude-wine.png",     span: "col-span-1 row-span-1" },
-  { label: "Pink Marble",     img: "/images/nail-pink-marble.png",   span: "col-span-1 row-span-1" },
-  { label: "Glitter Candle",  img: "/images/nail-glitter-candle.png",span: "col-span-1 row-span-1" },
-  { label: "Mauve Gold",      img: "/images/nail-mauve-gold.png",    span: "col-span-1 row-span-1" },
-  { label: "Nail Art",        img: "/images/nail-art-file.png",      span: "col-span-1 row-span-1" },
-  { label: "Red Hand",        img: "/images/nail-red-hand.png",      span: "col-span-1 row-span-1" },
+  { label: "Red Passion",    img: "/images/nail-red-flat.png",       col: "col-span-2 row-span-2" },
+  { label: "Nude Ring",      img: "/images/nail-nude-ring.png",      col: "col-span-1 row-span-1" },
+  { label: "Pink Marble",    img: "/images/nail-pink-marble.png",    col: "col-span-1 row-span-1" },
+  { label: "Nude Wine",      img: "/images/nail-nude-wine.png",      col: "col-span-1 row-span-1" },
+  { label: "Glitter Candle", img: "/images/nail-glitter-candle.png", col: "col-span-1 row-span-1" },
+]
+
+const photosBottom = [
+  { label: "Mauve Gold", img: "/images/nail-mauve-gold.png",  col: "col-span-1" },
+  { label: "Art & File", img: "/images/nail-art-file.png",    col: "col-span-1" },
+  { label: "Red Hand",   img: "/images/nail-red-hand.png",    col: "col-span-1" },
 ]
 
 export default function Gallery() {
   const [hovered, setHovered] = useState(null)
 
   return (
-    <section id="galeria" className="py-32 bg-cream">
+    <section id="galeria" className="py-36 relative overflow-hidden" style={{ background: "#0A0A0A" }}>
+      {/* Ghost watermark */}
+      <span className="absolute top-4 left-1/2 -translate-x-1/2 font-display font-bold leading-none select-none pointer-events-none whitespace-nowrap" style={{ fontSize: "clamp(5rem, 14vw, 14rem)", color: "rgba(255,255,255,0.02)" }}>
+        GALERIA
+      </span>
+
       <div className="max-w-7xl mx-auto px-8">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="flex items-end gap-8 mb-16"
+          className="flex items-end justify-between mb-16"
         >
           <div>
-            <p className="font-body text-[10px] tracking-[0.5em] uppercase text-rose mb-4">
-              Nosso trabalho
-            </p>
-            <h2 className="font-display text-5xl md:text-7xl font-light text-espresso">
-              <span className="italic">Galeria</span>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-8 h-px bg-gold" />
+              <p className="font-body text-[9px] tracking-[0.5em] uppercase text-gold">
+                Nosso trabalho
+              </p>
+            </div>
+            <h2 className="font-display text-5xl md:text-7xl font-semibold leading-[0.88] tracking-tight text-white">
+              <span className="italic font-light">Galeria</span>
             </h2>
           </div>
-          <div className="mb-3 hidden md:block">
-            <div className="w-24 h-px bg-nude/40" />
-          </div>
+          <p className="hidden md:block font-body text-[10px] tracking-[0.3em] uppercase mb-2" style={{ color: "rgba(255,255,255,0.18)" }}>
+            8 trabalhos selecionados
+          </p>
         </motion.div>
 
-        {/* Main bento grid — first 5 items */}
-        <div className="grid grid-cols-4 grid-rows-2 gap-3 h-[580px] mb-3">
-          {photos.slice(0, 5).map((p, i) => (
+        {/* Main bento grid */}
+        <div className="grid grid-cols-4 gap-2 h-[560px] mb-2">
+          {photos.map((p, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: i * 0.1 }}
-              className={`${p.span} relative overflow-hidden group cursor-pointer`}
+              transition={{ duration: 0.7, delay: i * 0.09 }}
+              className={`${p.col} relative overflow-hidden cursor-pointer`}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
             >
@@ -55,38 +67,43 @@ export default function Gallery() {
                 src={p.img}
                 alt={p.label}
                 className="absolute inset-0 w-full h-full object-cover"
-                animate={{ scale: hovered === i ? 1.08 : 1 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                animate={{ scale: hovered === i ? 1.06 : 1 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               />
               <motion.div
-                className="absolute inset-0 flex flex-col justify-end p-5"
-                animate={{
-                  backgroundColor: hovered === i ? "rgba(44,24,16,0.60)" : "rgba(44,24,16,0)",
-                }}
-                transition={{ duration: 0.5 }}
+                className="absolute inset-0 flex flex-col justify-between p-5"
+                animate={{ backgroundColor: hovered === i ? "rgba(10,10,10,0.5)" : "rgba(10,10,10,0)" }}
+                transition={{ duration: 0.4 }}
               >
                 <motion.div
-                  animate={{ opacity: hovered === i ? 1 : 0, y: hovered === i ? 0 : 10 }}
-                  transition={{ duration: 0.4 }}
+                  animate={{ opacity: hovered === i ? 1 : 0 }}
+                  transition={{ duration: 0.35 }}
+                  className="self-end"
                 >
-                  <div className="w-6 h-px bg-gold mb-2" />
-                  <p className="font-display italic text-cream text-lg">{p.label}</p>
+                  <span className="font-body text-[8px] tracking-[0.4em] uppercase text-white/60">KF</span>
+                </motion.div>
+                <motion.div
+                  animate={{ opacity: hovered === i ? 1 : 0, y: hovered === i ? 0 : 8 }}
+                  transition={{ duration: 0.35 }}
+                >
+                  <div className="w-5 h-px bg-gold mb-2" />
+                  <p className="font-display italic text-white text-xl font-light">{p.label}</p>
                 </motion.div>
               </motion.div>
             </motion.div>
           ))}
         </div>
 
-        {/* Second row — remaining 3 items */}
-        <div className="grid grid-cols-3 gap-3 h-[280px]">
-          {photos.slice(5).map((p, i) => (
+        {/* Bottom row — 3 equal columns */}
+        <div className="grid grid-cols-3 gap-2 h-[240px]">
+          {photosBottom.map((p, i) => (
             <motion.div
               key={i + 5}
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: (i + 5) * 0.08 }}
-              className="relative overflow-hidden group cursor-pointer"
+              transition={{ duration: 0.7, delay: (i + 5) * 0.07 }}
+              className="relative overflow-hidden cursor-pointer"
               onMouseEnter={() => setHovered(i + 5)}
               onMouseLeave={() => setHovered(null)}
             >
@@ -94,42 +111,42 @@ export default function Gallery() {
                 src={p.img}
                 alt={p.label}
                 className="absolute inset-0 w-full h-full object-cover"
-                animate={{ scale: hovered === i + 5 ? 1.08 : 1 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                animate={{ scale: hovered === i + 5 ? 1.06 : 1 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               />
               <motion.div
                 className="absolute inset-0 flex flex-col justify-end p-5"
-                animate={{
-                  backgroundColor: hovered === i + 5 ? "rgba(44,24,16,0.60)" : "rgba(44,24,16,0)",
-                }}
-                transition={{ duration: 0.5 }}
+                animate={{ backgroundColor: hovered === i + 5 ? "rgba(10,10,10,0.5)" : "rgba(10,10,10,0)" }}
+                transition={{ duration: 0.4 }}
               >
                 <motion.div
-                  animate={{ opacity: hovered === i + 5 ? 1 : 0, y: hovered === i + 5 ? 0 : 10 }}
-                  transition={{ duration: 0.4 }}
+                  animate={{ opacity: hovered === i + 5 ? 1 : 0, y: hovered === i + 5 ? 0 : 8 }}
+                  transition={{ duration: 0.35 }}
                 >
-                  <div className="w-6 h-px bg-gold mb-2" />
-                  <p className="font-display italic text-cream text-lg">{p.label}</p>
+                  <div className="w-5 h-px bg-gold mb-2" />
+                  <p className="font-display italic text-white text-lg font-light">{p.label}</p>
                 </motion.div>
               </motion.div>
             </motion.div>
           ))}
         </div>
 
+        {/* CTA footer */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="flex items-center justify-center gap-4 mt-12"
+          className="flex items-center justify-center gap-5 mt-16"
         >
-          <div className="w-12 h-px bg-nude/30" />
+          <div className="w-12 h-px" style={{ background: "rgba(255,255,255,0.08)" }} />
           <a
             href="#agendar"
-            className="font-body text-[10px] tracking-[0.4em] uppercase text-espresso/40 hover:text-gold transition-colors duration-300 cursor-pointer"
+            className="font-body text-[9px] tracking-[0.5em] uppercase hover:text-gold transition-colors duration-300 cursor-pointer"
+            style={{ color: "rgba(255,255,255,0.25)" }}
           >
             Agendar sua transformação
           </a>
-          <div className="w-12 h-px bg-nude/30" />
+          <div className="w-12 h-px" style={{ background: "rgba(255,255,255,0.08)" }} />
         </motion.div>
       </div>
     </section>

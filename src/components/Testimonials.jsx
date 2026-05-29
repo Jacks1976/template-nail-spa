@@ -5,25 +5,25 @@ const testimonials = [
   {
     name: "Ana Carolina M.",
     city: "Greenville, SC",
-    text: "Katiuscia é incrível! Minhas unhas nunca ficaram tão lindas. O atendimento é impecável e o resultado sempre supera minhas expectativas. Já voltei três vezes este mês.",
+    text: "Katiuscia é incrível. Minhas unhas nunca ficaram tão lindas — o atendimento é impecável e o resultado sempre supera minhas expectativas.",
     stars: 5,
   },
   {
     name: "Juliana Ferreira",
     city: "Spartanburg, SC",
-    text: "A técnica em gel da Katiuscia é perfeita — dura muito mais do que imaginei. O ambiente é sofisticado e me sinto especial a cada visita. Indispensável!",
+    text: "A técnica em gel da Katiuscia é simplesmente perfeita. Dura muito mais do que imaginei e o ambiente é sofisticado. Indispensável.",
     stars: 5,
   },
   {
     name: "Fernanda Costa",
     city: "Greer, SC",
-    text: "Atenção personalizada e resultado que fala por si. Me sinto uma rainha cada vez que saio daqui. A nail art ficou exatamente como eu sonhei.",
+    text: "Atenção personalizada e resultado que fala por si. Me sinto uma rainha cada vez que saio daqui. A nail art ficou exatamente como sonhei.",
     stars: 5,
   },
   {
     name: "Mariana Oliveira",
     city: "Greenville, SC",
-    text: "Profissionalismo e carinho em cada detalhe. A KF Nail Design é um lugar que realmente entende o que é luxo acessível. Recomendo de olhos fechados.",
+    text: "Profissionalismo e carinho em cada detalhe. A KF Nail Design é um lugar que realmente entende o que é luxo com qualidade real.",
     stars: 5,
   },
 ]
@@ -32,73 +32,92 @@ export default function Testimonials() {
   const [current, setCurrent] = useState(0)
 
   return (
-    <section id="depoimentos" className="py-32 bg-espresso relative overflow-hidden">
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-        <span className="font-display text-[22rem] text-cream/[0.015] leading-none">"</span>
+    <section id="depoimentos" className="py-36 bg-white relative overflow-hidden">
+      {/* Ghost section number */}
+      <span className="absolute top-8 left-8 font-display text-[12rem] font-bold leading-none select-none pointer-events-none" style={{ color: "rgba(0,0,0,0.025)" }}>
+        04
+      </span>
+
+      {/* Giant editorial quote mark */}
+      <div className="absolute top-12 left-1/2 -translate-x-1/2 font-display leading-none select-none pointer-events-none" style={{ fontSize: "18rem", color: "rgba(201,169,110,0.06)" }}>
+        "
       </div>
 
-      <div className="max-w-4xl mx-auto px-8 relative z-10">
+      <div className="max-w-3xl mx-auto px-8 relative z-10">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          <p className="font-body text-[10px] tracking-[0.5em] uppercase text-gold mb-4">
-            Experiências reais
-          </p>
-          <h2 className="font-display text-5xl md:text-6xl font-light text-cream">
-            O que nossas <span className="italic text-nude">clientes</span><br />dizem
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <div className="w-8 h-px bg-gold" />
+            <p className="font-body text-[9px] tracking-[0.5em] uppercase text-gold">
+              Experiências reais
+            </p>
+            <div className="w-8 h-px bg-gold" />
+          </div>
+          <h2 className="font-display text-5xl md:text-6xl font-semibold leading-[0.9] tracking-tight" style={{ color: "#0A0A0A" }}>
+            O que nossas{" "}
+            <span className="italic font-light">clientes</span>
+            <br />dizem
           </h2>
         </motion.div>
 
+        {/* Quote carousel */}
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, y: -24 }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             className="text-center"
           >
-            <div className="flex justify-center gap-1.5 mb-10">
+            {/* Stars */}
+            <div className="flex justify-center gap-2 mb-10">
               {[...Array(5)].map((_, i) => (
-                <svg key={i} className="w-4 h-4 text-gold fill-current" viewBox="0 0 24 24">
+                <svg key={i} className="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 24 24">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                 </svg>
               ))}
             </div>
 
-            <blockquote className="font-display text-2xl md:text-3xl font-light italic text-cream/90 leading-relaxed mb-12 max-w-2xl mx-auto">
+            {/* Quote */}
+            <blockquote className="font-display text-2xl md:text-3xl font-light italic leading-[1.5] mb-12 max-w-2xl mx-auto" style={{ color: "rgba(0,0,0,0.75)" }}>
               "{testimonials[current].text}"
             </blockquote>
 
-            <div className="flex items-center justify-center gap-4">
-              <div className="w-8 h-px bg-gold/40" />
+            {/* Attribution */}
+            <div className="flex items-center justify-center gap-5">
+              <div className="w-10 h-px" style={{ background: "rgba(201,169,110,0.4)" }} />
               <div>
-                <p className="font-body text-sm tracking-widest text-nude">
+                <p className="font-body text-sm font-medium tracking-wider" style={{ color: "#0A0A0A" }}>
                   {testimonials[current].name}
                 </p>
-                <p className="font-body text-[10px] tracking-[0.3em] uppercase text-nude/30 mt-1">
+                <p className="font-body text-[9px] tracking-[0.35em] uppercase mt-1" style={{ color: "rgba(0,0,0,0.28)" }}>
                   {testimonials[current].city}
                 </p>
               </div>
-              <div className="w-8 h-px bg-gold/40" />
+              <div className="w-10 h-px" style={{ background: "rgba(201,169,110,0.4)" }} />
             </div>
           </motion.div>
         </AnimatePresence>
 
-        <div className="flex justify-center gap-3 mt-16">
+        {/* Navigation dots */}
+        <div className="flex justify-center items-center gap-3 mt-16">
           {testimonials.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`transition-all duration-500 cursor-pointer ${
-                i === current
-                  ? "w-8 h-px bg-gold"
-                  : "w-3 h-px bg-nude/30 hover:bg-nude/60"
-              }`}
+              className="transition-all duration-400 cursor-pointer rounded-none"
+              style={{
+                width: i === current ? "2.5rem" : "1rem",
+                height: "1px",
+                background: i === current ? "#C9A96E" : "rgba(0,0,0,0.18)",
+              }}
               aria-label={`Depoimento ${i + 1}`}
             />
           ))}
